@@ -1,12 +1,11 @@
 package com.himu.first_application.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class Controller {
 
     @GetMapping("/hello")
@@ -28,6 +27,19 @@ public class Controller {
     public String personalInfo(@RequestParam String me, @RequestParam String father) {
         String output = "hello, i'm " + me + ". father's name: " + father;
         return output;
+    }
+
+    @GetMapping("/info")
+    public String info(@RequestParam(name = "aa") String myName,
+                       @RequestParam(required = false, name = "father_name") String fatherName,
+                       @RequestParam(value = "bb") int sonAge
+                       //@RequestParam(name = "bb") int sonAge
+                       ) {
+        if (fatherName != null) {
+            return "I am: " + myName + " and my father's name is: " + fatherName + ", my age: " + sonAge;
+        } else {
+            return "I am: " + myName + " and my age: " + sonAge;
+        }
     }
 
 }
