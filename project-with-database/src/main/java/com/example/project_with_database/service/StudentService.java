@@ -1,6 +1,7 @@
 package com.example.project_with_database.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,15 @@ public class StudentService {
 
 	public void deleteById(int id) {
 		repository.deleteById(id);
+	}
+
+	public Optional<Student> findStudentById(int id) {
+		return repository.findById(id);
+	}
+
+	public List<Student> getStudentsByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
