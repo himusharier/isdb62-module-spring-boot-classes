@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.example.project_with_database.model.Student;
 import com.example.project_with_database.repository.StudentRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class StudentService {
 

@@ -16,11 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.project_with_database.model.Student;
 import com.example.project_with_database.service.StudentService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(value = "/student")
 public class StudentController {
+	// field injection
+	// @Autowired
+
+	// private static final Logger log =
+	// LoggerFactory.getLogger(StudentController.class);
 	private final StudentService service;
 
+	// constructor injection
 	public StudentController(StudentService service) {
 		this.service = service;
 	}
@@ -33,6 +42,7 @@ public class StudentController {
 
 	@GetMapping
 	public List<Student> getStudents() {
+		log.info("calling get Students");
 		return service.getStudents();
 	}
 
