@@ -2,7 +2,6 @@ package com.rasel.journalApp.entity;
 
 import jakarta.persistence.*;
 
-import java.lang.annotation.Documented;
 import java.time.LocalDate;
 
 
@@ -10,24 +9,22 @@ import java.time.LocalDate;
 public class JournalEntry {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate id
+    private Long id;
     private String title;
     private String content;
     private LocalDate date;
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id") 
     private User user;
 
 
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,4 +43,18 @@ public class JournalEntry {
     public void setContent(String content) {
         this.content = content;
     }
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public void setUser(User user) {
+	    this.user = user;
+	}
+    
+    
 }

@@ -21,7 +21,7 @@ public class journalEntryControllerv2 {
     @Autowired
     private UserService userService;
 
-    @GetMapping("{userName}")
+    @GetMapping("/{userName}")
     public ResponseEntity<?> getAllJurnalEntriesOfUsr(@PathVariable String userName) {
         User user = userService.findByUserName(userName);
         List<JournalEntry> all = user.getJournalEntry();
@@ -31,7 +31,8 @@ public class journalEntryControllerv2 {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("{userName}")
+
+    @PostMapping("/{userName}")
     public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myEntry, @PathVariable String userName) {
         try {
 //            myEntry.setDate(LocalDate.now());
