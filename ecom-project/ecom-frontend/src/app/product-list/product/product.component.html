@@ -1,0 +1,16 @@
+<a href="product/{{ product.id }}" style="text-decoration: none;">
+<div class="product-card">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ product.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ product.brand }}</h6>
+        <p class="card-text">{{ product.description }}</p>
+        <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+        <p class="card-text"><strong>Category:</strong> {{ product.category }}</p>
+        <p class="card-text"><strong>Release Date:</strong> {{ product.releaseDate }}</p>
+        <p class="card-text"><strong>Available:</strong> {{ product.available ? 'Yes' : 'No' }}</p>
+        <p class="card-text"><strong>Quantity:</strong> {{ product.quantity }}</p>
+      </div>
+    </div>
+  </div>
+</a>
