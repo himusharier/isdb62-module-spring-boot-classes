@@ -1,0 +1,12 @@
+Spring Framework Tutorial | Full Course:
+	https://www.youtube.com/watch?v=If1Lw4pLLEo
+
+Spring Framework: A Tutorial for Beginners | in28minutes | Ranga Karanam:
+	https://www.youtube.com/watch?v=f6DHAgL7FWc
+
+Spring Boot Tutorial for Beginners [2025]:
+	https://www.youtube.com/watch?v=gJrjgg1KVL4
+
+===============================================================================
+design pattern & refactoring learning:
+	https://refactoring.guru/

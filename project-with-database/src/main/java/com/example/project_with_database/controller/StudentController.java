@@ -3,6 +3,7 @@ package com.example.project_with_database.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,11 @@ public class StudentController {
 
 	// private static final Logger log =
 	// LoggerFactory.getLogger(StudentController.class);
+
+//	private String msg = "new message";
+	@Value("${custom.msg}")
+	private String msg;
+
 	private final StudentService service;
 
 	// constructor injection
@@ -82,6 +88,11 @@ public class StudentController {
 	public List<Student> getStudentByName(@RequestParam String name) {
 		List<Student> students = service.getStudentsByName(name);
 		return students;
+	}
+
+	@GetMapping("/hello")
+	public String hello() {
+		return "hello, students! " + msg;
 	}
 
 }
