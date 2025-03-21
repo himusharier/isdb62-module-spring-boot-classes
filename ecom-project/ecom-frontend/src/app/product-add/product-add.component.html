@@ -1,0 +1,87 @@
+<div class="add-product-container">
+    <h4>Add New Product</h4>
+    <hr>
+    <form (ngSubmit)="onSubmit()" [formGroup]="productForm">
+      <div class="row">
+        <!-- Product Name -->
+        <div class="col-md-6 form-group">
+          <label for="name">Product Name</label>
+          <input type="text" id="name" formControlName="name" class="form-control" placeholder="Enter product name" required />
+        </div>
+  
+        <!-- Product Brand -->
+        <div class="col-md-6 form-group">
+          <label for="brand">Brand</label>
+          <input type="text" id="brand" formControlName="brand" class="form-control" placeholder="Enter product brand" required />
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Price -->
+        <div class="col-md-6 form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" formControlName="price" class="form-control" placeholder="Enter product price" required />
+        </div>
+  
+        <!-- Product Category -->
+        <div class="col-md-6 form-group">
+          <label for="category">Category</label>
+          <select id="category" formControlName="category" class="form-control" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="home">Home</option>
+            <option value="toys">Toys</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Description (Short Input Field) -->
+        <div class="col-md-12 form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" formControlName="description" class="form-control" placeholder="Enter short product description" required />
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Release Date -->
+        <div class="col-md-6 form-group">
+          <label for="releaseDate">Release Date</label>
+          <input type="date" id="releaseDate" formControlName="releaseDate" class="form-control" required />
+        </div>
+  
+        <!-- Product Available -->
+        <div class="col-md-6 form-group">
+          <label>Available</label><br />
+          <label style="font-weight: normal;">
+            <input type="radio" formControlName="available" value="true" required /> Yes
+          </label>
+          <br>
+          <label style="font-weight: normal;">
+            <input type="radio" formControlName="available" value="false" required /> No
+          </label>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Quantity -->
+        <div class="col-md-6 form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" formControlName="quantity" class="form-control" placeholder="Enter product quantity" required />
+        </div>
+  
+        <!-- Product Image -->
+        <div class="col-md-6 form-group">
+          <label for="image">Product Image</label>
+          <input type="file" id="image" formControlName="image" (change)="onFileChange($event)" class="form-control" accept="image/*" required />
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Add Product</button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { apiConfig } from '../api/api-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductDetailsService {
 
-  apiUrl = 'http://localhost:8081/api/product';
+  apiUrl = `${apiConfig.apiBaseUrl}/product`;
   
   constructor(private http: HttpClient) { }
 

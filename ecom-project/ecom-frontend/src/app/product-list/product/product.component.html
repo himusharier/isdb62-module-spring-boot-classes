@@ -1,7 +1,10 @@
 <a href="product/{{ product.id }}" style="text-decoration: none;">
-<div class="product-card">
+  <div class="product-card">
     <div class="card">
       <div class="card-body">
+        <!-- Add an image here -->
+        <img src="{{ apiBaseUrl }}/product/{{ product.id }}/image" alt="{{ product.name }}" class="card-img-top" width="150" height="150" />
+
         <h5 class="card-title">{{ product.name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ product.brand }}</h6>
         <p class="card-text">{{ product.description }}</p>

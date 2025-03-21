@@ -6,14 +6,14 @@ import { apiConfig } from '../api/api-config';
 @Injectable({
   providedIn: 'root'
 })
-export class ProductListService {
-
-  apiUrl = `${apiConfig.apiBaseUrl}/products`;
+export class ProductDeleteService {
+  apiUrl: string = "";
   
   constructor(private http: HttpClient) { }
 
-  getProducts(): Observable<any> {
-    return this.http.get<any[]>(this.apiUrl);
+  productDelete(productId: number): Observable<any> {
+    this.apiUrl = `${apiConfig.apiBaseUrl}/product/${productId}`;
+    return this.http.delete(this.apiUrl);
   }
   
 }
