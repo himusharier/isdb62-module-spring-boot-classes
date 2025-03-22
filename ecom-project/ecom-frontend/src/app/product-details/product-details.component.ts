@@ -24,14 +24,14 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const productId = this.route.snapshot.paramMap.get('productId');
+    const productId = Number(this.route.snapshot.paramMap.get('productId'));
     if (productId) {
       this.fetchProductDetails(productId);
     }
     
   }
 
-  fetchProductDetails(productId: string) {
+  fetchProductDetails(productId: number) {
     this.productDetailsService.getProductById(productId).subscribe(
       (data) => {
         this.product = data;
@@ -55,7 +55,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   updateProduct(productId: number) {
-    window.location.href=`/update-product/${productId}`;
+    window.location.href=`/product/${productId}/edit`;
   }
 
 }

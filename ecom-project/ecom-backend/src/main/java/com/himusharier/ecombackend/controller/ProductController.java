@@ -73,9 +73,9 @@ public class ProductController {
                                                 @ModelAttribute ProductRequestDto product) {
         Product updatedProduct = service.updateProduct(id, ProductRequestDto.toProduct(product));
         if (updatedProduct != null) {
-            return new ResponseEntity<>("Updated", HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Failed to update", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
 

@@ -8,6 +8,7 @@ export class Product {
     releaseDate: Date;
     available: boolean;
     quantity: number;
+    image: string;
 
     constructor(
         id: number,
@@ -18,7 +19,8 @@ export class Product {
         category: string,
         releaseDate: Date,
         available: boolean,
-        quantity: number
+        quantity: number,
+        image: string
     ) {
         this.id = id;
         this.name = name;
@@ -29,5 +31,6 @@ export class Product {
         this.releaseDate = releaseDate;
         this.available = available;
         this.quantity = quantity;
+        this.image = image;
     }
 }

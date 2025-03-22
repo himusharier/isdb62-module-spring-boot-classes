@@ -1,0 +1,92 @@
+<div class="add-product-container">
+    <h4>{{ productId ? 'Edit Product' : 'Add New Product' }}</h4>
+    <hr>
+    <form (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!-- Product Name -->
+        <div class="col-md-6 form-group">
+          <label for="name">Product Name</label>
+          <input type="text" id="name" [(ngModel)]="product.name" name="name" class="form-control" placeholder="Enter product name" required />
+        </div>
+  
+        <!-- Product Brand -->
+        <div class="col-md-6 form-group">
+          <label for="brand">Brand</label>
+          <input type="text" id="brand" [(ngModel)]="product.brand" name="brand" class="form-control" placeholder="Enter product brand" required />
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Price -->
+        <div class="col-md-6 form-group">
+          <label for="price">Price</label>
+          <input type="number" id="price" [(ngModel)]="product.price" name="price" class="form-control" placeholder="Enter product price" required />
+        </div>
+  
+        <!-- Product Category -->
+        <div class="col-md-6 form-group">
+          <label for="category">Category</label>
+          <select id="category" [(ngModel)]="product.category" name="category" class="form-control" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="electronics">Electronics</option>
+            <option value="fashion">Fashion</option>
+            <option value="home">Home</option>
+            <option value="toys">Toys</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Description (Short Input Field) -->
+        <div class="col-md-12 form-group">
+          <label for="description">Description</label>
+          <input type="text" id="description" [(ngModel)]="product.description" name="description" class="form-control" placeholder="Enter short product description" required />
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Release Date -->
+        <div class="col-md-6 form-group">
+          <label for="releaseDate">Release Date</label>
+          <input type="date" id="releaseDate" [(ngModel)]="product.releaseDate" name="releaseDate" class="form-control" required />
+        </div>
+  
+        <!-- Product Available -->
+        <div class="col-md-6 form-group">
+          <label>Available</label><br />
+          <label style="font-weight: normal;">
+            <input type="radio" [(ngModel)]="product.available" name="available" [value]="true" required /> Yes
+          </label>
+          <br>
+          <label style="font-weight: normal;">
+            <input type="radio" [(ngModel)]="product.available" name="available" [value]="false" required /> No
+          </label>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Product Quantity -->
+        <div class="col-md-6 form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" [(ngModel)]="product.quantity" name="quantity" class="form-control" placeholder="Enter product quantity" required />
+        </div>
+  
+        <!-- Product Image -->
+        <div class="col-md-6 form-group">
+          <label for="image">Product Image</label>
+          <!-- Image Preview -->
+          <div class="image-preview">
+            <img src="{{ apiBaseUrl }}/product/{{ product.id }}/image" alt="{{ product.name }}" class="preview-image" />
+          </div>
+          <input type="file" id="image" (change)="onFileChange($event)" class="form-control" accept="image/*" />          
+        </div>
+      </div>
+  
+      <!-- Submit Button -->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">
+          {{ productId ? 'Update Product' : 'Add Product' }}
+        </button>
+      </div>
+    </form>
+  </div>

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -16,7 +17,7 @@ public class ProductRequestDto {
     private String brand;
     private BigDecimal price;
     private String category;
-    private String releaseDate;
+    private LocalDate releaseDate;
     private boolean available;
     private int quantity;
     private String imageName;
@@ -26,11 +27,11 @@ public class ProductRequestDto {
     public static Product toProduct(ProductRequestDto dto) {
         try {
             // Convert releaseDate string to java.util.Date
-            Date releaseDate = null;
-            if (dto.getReleaseDate() != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                releaseDate = sdf.parse(dto.getReleaseDate());
-            }
+//            Date releaseDate = null;
+//            if (dto.getReleaseDate() != null) {
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//                releaseDate = sdf.parse(dto.getReleaseDate());
+//            }
 
             // Build the Product entity
             return Product.builder()
@@ -39,7 +40,7 @@ public class ProductRequestDto {
                     .price(dto.getPrice())
                     .category(dto.getCategory())
                     .description(dto.getDescription())
-                    .releaseDate(releaseDate)  // Setting the Date type for releaseDate
+                    .releaseDate(dto.getReleaseDate())  // Setting the Date type for releaseDate
                     .available(dto.isAvailable())
                     .quantity(dto.getQuantity())
                     // Handle the image file if it's provided
@@ -47,10 +48,6 @@ public class ProductRequestDto {
                     .imageType(dto.imageFile != null ? dto.imageFile.getContentType() : null)  // Get image type from MultipartFile
                     .imageData(dto.imageFile != null ? dto.imageFile.getBytes() : null)  // Get image bytes from MultipartFile
                     .build();
-        } catch (ParseException e) {
-            // Handle date parsing error
-            e.printStackTrace();
-            return null;  // Or handle this exception based on your requirements
         } catch (IOException e) {
             // Handle the error for file processing
             e.printStackTrace();

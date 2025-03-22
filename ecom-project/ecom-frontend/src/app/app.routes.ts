@@ -8,5 +8,5 @@ export const routes: Routes = [
     {path: '', component: ProductListComponent},
     {path: 'product/:productId', component: ProductDetailsComponent},
     {path: 'add-product', component: ProductAddComponent},
-    {path: 'update-product/:productId', component: ProductUpdateComponent}
+    {path: 'product/:productId/edit', component: ProductUpdateComponent}
 ];
