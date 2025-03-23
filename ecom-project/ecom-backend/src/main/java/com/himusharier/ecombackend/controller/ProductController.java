@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,6 +72,10 @@ public class ProductController {
     @PutMapping("/product/{id}")
     public ResponseEntity<String> updateProduct(@PathVariable int id,
                                                 @ModelAttribute ProductRequestDto product) {
+        // @ModelAttribute for form data @RequestBody for body data
+        if (product == null) {
+            return new ResponseEntity<>("Product data is null", HttpStatus.BAD_REQUEST);
+        }
         Product updatedProduct = service.updateProduct(id, ProductRequestDto.toProduct(product));
         if (updatedProduct != null) {
             return new ResponseEntity<>(HttpStatus.OK);

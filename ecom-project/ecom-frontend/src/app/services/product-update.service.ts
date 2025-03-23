@@ -13,8 +13,8 @@ export class ProductUpdateService {
   
   constructor(private http: HttpClient) { }
 
-  updateProduct(productId: number, product: Product): Observable<any> {
-    debugger;
+  updateProduct(productId: number, product: FormData): Observable<any> {
+    
     return this.http.put(`${this.apiUrl}/${productId}`, product);
   }
 

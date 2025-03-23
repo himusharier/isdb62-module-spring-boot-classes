@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsService } from '../services/product-details.service';
 import { ProductUpdateService } from '../services/product-update.service';
@@ -28,12 +28,15 @@ export class ProductUpdateComponent implements OnInit {
     image: ''
   };
   apiBaseUrl = apiConfig.apiBaseUrl;
+  productForm!: FormGroup;
+  selectedImage: File | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductDetailsService,
-    private productUpdateService: ProductUpdateService
+    private productUpdateService: ProductUpdateService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +44,18 @@ export class ProductUpdateComponent implements OnInit {
     if (this.productId) {
       this.product = this.fetchProduct(this.productId);
     }
+
+    this.productForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      brand: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(0)]],
+      category: ['', Validators.required],
+      description: ['', Validators.required],
+      releaseDate: ['', Validators.required],
+      available: ['', [Validators.required]],
+      quantity: ['', [Validators.required, Validators.min(1)]],
+      image: ['']
+    });
   }
 
   fetchProduct(id: number): Product {
@@ -57,12 +72,34 @@ export class ProductUpdateComponent implements OnInit {
     return this.product;
   }
 
+  onFileChange(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedImage = file;
+    }
+  }
+
   onSubmit(): void {
+
+    const formData = new FormData();
+    formData.append('name', this.productForm.get('name')?.value);
+    formData.append('brand', this.productForm.get('brand')?.value);
+    formData.append('price', this.productForm.get('price')?.value);
+    formData.append('category', this.productForm.get('category')?.value);
+    formData.append('description', this.productForm.get('description')?.value);
+    formData.append('releaseDate', this.productForm.get('releaseDate')?.value);
+    formData.append('available', this.productForm.get('available')?.value === 'true' ? 'true' : 'false');
+    formData.append('quantity', this.productForm.get('quantity')?.value);
+
+    if (this.selectedImage) {
+      formData.append('imageFile', this.selectedImage);
+    }
+    
     if (this.productId) {
-      this.productUpdateService.updateProduct(this.productId, this.product).subscribe(
+      this.productUpdateService.updateProduct(this.productId, formData).subscribe(
         () => {
           alert('Product updated successfully!');
-          this.router.navigate(['/products']);
+          //this.router.navigate(['/products']);
         },
         (error) => {
           console.error('Error updating product', error);
@@ -71,10 +108,5 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
 
-  onFileChange(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.product.image = file;
-    }
-  }
+  
 }
