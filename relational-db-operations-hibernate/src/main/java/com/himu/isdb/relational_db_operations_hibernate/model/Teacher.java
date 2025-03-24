@@ -3,6 +3,9 @@ package com.himu.isdb.relational_db_operations_hibernate.model;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.himu.isdb.relational_db_operations_hibernate.config.InstantDeserializer;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,12 +41,13 @@ public class Teacher {
     @Column(nullable = false)
     private String phone;
 
+    @JsonDeserialize(using = InstantDeserializer.class)
     @Column(name = "joining_date", nullable = false, updatable = false)
     private Instant joiningDate;
 
     @Column(nullable = false)
     private BigDecimal salary;
 
-    @Column(name = "marital_status") //can be null.
-    private Boolean maritalStatus;
+    @Column(name = "is_married") //can be null.
+    private Boolean isMarried;
 }

@@ -3,6 +3,9 @@ package com.himu.isdb.relational_db_operations_hibernate.model;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.himu.isdb.relational_db_operations_hibernate.config.InstantDeserializer;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +27,7 @@ import lombok.Setter;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
     @Column(nullable = false, length = 50)
     private String name;
@@ -51,6 +54,7 @@ public class Student {
     @Column(nullable = false, length = 10)
     private String gender;
 
+    @JsonDeserialize(using = InstantDeserializer.class)
     @Column(updatable = false)
     private Instant dob;
 }

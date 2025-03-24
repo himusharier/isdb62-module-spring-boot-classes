@@ -20,9 +20,9 @@ import lombok.Setter;
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Integer id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50, unique = true)
     private String name;
 
     @OneToOne
@@ -31,5 +31,5 @@ public class Classroom {
     private Teacher classTeacher;
 
     @Column(name = "room_number", nullable = false, unique = true, length = 10)
-    private String roomNumber;
+    private Integer roomNumber;
 }
