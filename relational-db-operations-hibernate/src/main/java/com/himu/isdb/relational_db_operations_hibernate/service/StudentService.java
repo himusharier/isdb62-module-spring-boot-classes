@@ -1,42 +1,60 @@
 package com.himu.isdb.relational_db_operations_hibernate.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.himu.isdb.relational_db_operations_hibernate.dto.StudentDto;
+import com.himu.isdb.relational_db_operations_hibernate.model.Classroom;
 import com.himu.isdb.relational_db_operations_hibernate.model.Student;
 import com.himu.isdb.relational_db_operations_hibernate.repository.StudentRepository;
 
 @Service
 public class StudentService {
-    private final StudentRepository repository;
+    private final StudentRepository studentRepository;
+	private final ClassroomService classroomService;
 
-	public StudentService(StudentRepository repository) {
-		this.repository = repository;
+	public StudentService(StudentRepository studentRepository, ClassroomService classroomService) {
+		this.studentRepository = studentRepository;
+		this.classroomService = classroomService;
 	}
 
-	public Student saveStudent(Student student) {
-		if (student != null)
-			return repository.save(student);
-		else
-			return null;
+	public Student saveStudent(StudentDto studentDto) {
+		Integer clazzId = studentDto.getClassId();
+		Classroom clazz = classroomService.getClassroom(clazzId);
+
+		Student student = new Student();
+		student.setName(studentDto.getName());
+		student.setEmail(studentDto.getEmail());
+		if (clazz != null) {
+			student.setClazz(clazz);
+		}
+		student.setRoll(studentDto.getRoll());
+		student.setPhone(studentDto.getPhone());
+		student.setAddress(studentDto.getAddress());
+		student.setGender(studentDto.getGender());
+		student.setDob(studentDto.getDob());
+
+		return studentRepository.save(student);
 	}
 
-	public List<Student> getStudents() {
-		return repository.findAll();
-	}
+    public Student getStudent(Integer id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getStudent'");
+    }
 
-	public void deleteById(int id) {
-		repository.deleteById(id);
-	}
+    public void deleteStudent(Integer id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteStudent'");
+    }
 
-	public Optional<Student> findStudentById(int id) {
-		return repository.findById(id);
-	}
+    public List<Student> getAllStudent() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAllStudent'");
+    }
 
-	public List<Student> getStudentsByName(String name) {
-//		return repository.findAllByName(name);
-		return null;
-	}
+    public Student updateStudent(Integer id, StudentDto studentDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateStudent'");
+    }
 }

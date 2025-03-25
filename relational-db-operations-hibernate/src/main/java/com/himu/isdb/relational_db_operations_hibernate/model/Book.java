@@ -34,7 +34,7 @@ public class Book {
 
     // @Transient
 	@OneToOne
-	@JoinColumn(name = "clazz", referencedColumnName = "id")
+	@JoinColumn(name = "clazz", referencedColumnName = "id", nullable = false)
 	private Classroom clazz;
 
     @ManyToOne
