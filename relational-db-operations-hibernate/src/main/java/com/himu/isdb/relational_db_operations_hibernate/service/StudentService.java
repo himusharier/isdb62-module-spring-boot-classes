@@ -1,6 +1,7 @@
 package com.himu.isdb.relational_db_operations_hibernate.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -39,22 +40,58 @@ public class StudentService {
 	}
 
     public Student getStudent(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStudent'");
+        return studentRepository.findById(id).orElse(null);
     }
 
     public void deleteStudent(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteStudent'");
+        studentRepository.deleteById(id);
     }
 
     public List<Student> getAllStudent() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllStudent'");
+        return studentRepository.findAll();
     }
 
     public Student updateStudent(Integer id, StudentDto studentDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateStudent'");
+        Optional<Student> studentById = studentRepository.findById(id);
+
+        if (studentById.isPresent()) {
+            Student aStudent = new Student();
+            if (studentDto.getName() != null) {
+                aStudent.setName(studentDto.getName());
+            }
+            if (studentDto.getEmail() != null) {
+                aStudent.setEmail(studentDto.getEmail());
+            }
+            if (studentDto.getClassId() != null) {
+                Integer classId = studentDto.getClassId();
+                Classroom clazz = classroomService.getClassroom(classId);
+                if (clazz == null) {
+                    throw new IllegalArgumentException("Class not found");
+                }
+                aStudent.setClazz(clazz);
+            }
+            if (studentDto.getRoll() != null) {
+                aStudent.setRoll(studentDto.getRoll());
+            }
+            // if (studentDTO.getBookIds() != null) {
+            // aStudent.setBooks(studentDTO.getBookIds());
+            // }
+            if (studentDto.getPhone() != null) {
+                aStudent.setPhone(studentDto.getPhone());
+            }
+            if (studentDto.getAddress() != null) {
+                aStudent.setAddress(studentDto.getAddress());
+            }
+            if (studentDto.getGender() != null) {
+                aStudent.setGender(studentDto.getGender());
+            }
+            if (studentDto.getDob() != null) {
+                aStudent.setDob(studentDto.getDob());
+            }
+
+            return studentRepository.save(aStudent);
+        } else {
+            throw new IllegalArgumentException("Student not found");
+        }
     }
 }

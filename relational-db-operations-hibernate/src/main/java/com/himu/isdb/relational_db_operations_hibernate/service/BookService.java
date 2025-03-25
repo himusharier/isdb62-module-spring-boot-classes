@@ -14,6 +14,7 @@ import com.himu.isdb.relational_db_operations_hibernate.repository.BookRepositor
 public class BookService {
     private final BookRepository bookRepository;
     private final ClassroomService classroomService;
+    
     public BookService(BookRepository bookRepository, ClassroomService classroomService) {
         this.bookRepository = bookRepository;
         this.classroomService = classroomService;
