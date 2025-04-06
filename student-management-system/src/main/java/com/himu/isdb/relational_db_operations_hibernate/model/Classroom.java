@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,20 +17,21 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "sms_class")
+@Entity
+@Table(name = "sms_class")
 public class Classroom {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    @Column(nullable = false, length = 50, unique = true)
-    private String name;
+	@Column(nullable = false, length = 50, unique = true)
+	private String name;
 
-    @OneToOne
-    @JoinColumn(name = "class_teacher", referencedColumnName = "id", nullable = false) //refered to Teacher id.
-    // @Column(name = "class_teacher", nullable = false, length = 50)
-    private Teacher classTeacher;
+	@OneToOne
+	@JoinColumn(name = "class_teacher", referencedColumnName = "id", nullable = false) // refered to Teacher id.
+	// @Column(name = "class_teacher", nullable = false, length = 50)
+	private Teacher classTeacher;
 
-    @Column(name = "room_number", nullable = false, unique = true, length = 10)
-    private Integer roomNumber;
+	@Column(name = "room_number", nullable = false, unique = true, length = 10)
+	private Integer roomNumber;
 }

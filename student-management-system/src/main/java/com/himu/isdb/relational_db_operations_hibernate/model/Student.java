@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,38 +24,39 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "sms_student")
+@Entity
+@Table(name = "sms_student")
 public class Student {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 
-    @Column(nullable = false, length = 50)
-    private String name;
+	@Column(nullable = false, length = 50)
+	private String name;
 
-    @Column(unique = true, length = 100)
-    private String email;
+	@Column(unique = true, length = 100)
+	private String email;
 
-    @OneToOne
-    @JoinColumn(name = "clazz", referencedColumnName = "id", nullable = false)
-    private Classroom clazz;
+	@OneToOne
+	@JoinColumn(name = "clazz", referencedColumnName = "id", nullable = false)
+	private Classroom clazz;
 
-    @Column(nullable = false, unique = true)
-    private Integer roll;
+	@Column(nullable = false, unique = true)
+	private Integer roll;
 
-    @OneToMany(mappedBy = "student")
-    private List<Book> book;
+	@OneToMany(mappedBy = "student")
+	private List<Book> book;
 
-    @Column(nullable = false, length = 17)
-    private String phone;
+	@Column(nullable = false, length = 17)
+	private String phone;
 
-    @Column(length = 100)
-    private String address;
+	@Column(length = 100)
+	private String address;
 
-    @Column(nullable = false, length = 10)
-    private String gender;
+	@Column(nullable = false, length = 10)
+	private String gender;
 
-    @JsonDeserialize(using = InstantDeserializer.class)
-    @Column(updatable = false)
-    private Instant dob;
+	@JsonDeserialize(using = InstantDeserializer.class)
+	@Column(updatable = false)
+	private Instant dob;
 }
