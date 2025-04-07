@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.himu.isdb.relational_db_operations_hibernate.dao.ClassTeacherDao;
 import com.himu.isdb.relational_db_operations_hibernate.dao.ClassTeacherProjection;
 import com.himu.isdb.relational_db_operations_hibernate.dto.ClassroomDto;
 import com.himu.isdb.relational_db_operations_hibernate.model.Classroom;
 import com.himu.isdb.relational_db_operations_hibernate.service.ClassroomService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/class")
+@Tag(name = "Classroom Controller", description = "API for classroom management")
 public class ClassroomController {
 	private final ClassroomService classroomService;
 
@@ -56,6 +58,16 @@ public class ClassroomController {
 		Classroom updated = classroomService.updateClassroom(id, classroomDto);
 		return updated;
 	}
+
+//	@GetMapping("/class-teachers")
+//	public List<ClassTeacherProjection> getAllClassTeachers() {
+//		return classroomService.getAllClassTeacher();
+//	}
+
+//	@GetMapping("/class-teachers")
+//	public List<ClassTeacherDao> getAllClassTeachers() {
+//		return classroomService.getAllClassTeacher();
+//	}
 
 	@GetMapping("/class-teachers")
 	public List<ClassTeacherProjection> getAllClassTeachers() {

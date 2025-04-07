@@ -74,8 +74,16 @@ public class ClassroomService {
 		}
 	}
 
+//	public List<ClassTeacherProjection> getAllClassTeacher() {
+//		return classroomRepository.getAllClassTeacher();
+//	}
+
+//	public List<ClassTeacherDao> getAllClassTeacher() {
+//		return classroomRepository.fetchAllClassTeacherDaos();
+//	}
+
 	public List<ClassTeacherProjection> getAllClassTeacher() {
-		return classroomRepository.getAllClassTeacher();
+		return classroomRepository.getAllClassTeacherRawQuery();
 	}
 
 }
