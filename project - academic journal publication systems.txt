@@ -1,0 +1,35 @@
+Project Name: "Academic Journal Publishing System"
+--------------------------------------------------
+
+Publisher Website Features:
+  - dummy publishing company details
+  - proper journal informations
+  - showcase the journals with issues
+  - user registration and login
+
+User Features: 
+  - profile management
+  - article or menuscript submission
+  - track article processing status
+  - menuscript search for status checking
+  - menuscript version control
+  - communication with editors
+
+Editor Features:
+  - review submitted articles
+  - provide feedback
+  - manage submissions
+  - post publication management
+
+Admin Panel Features:
+  - user management 
+       (user list, create user, suspend or delete, assign role, monitor activity, notification to users)
+  - editor management 
+       (add or remove editor, premissions, assign submitted articles or manuscript, notifications to editors)
+  - submission management 
+       (track submission flow, approve for review or rejection, initial screening)
+  - journal and issue management
+       (create and manage journals, maintain issues, assign articles to issues)
+
+
+
