@@ -1,0 +1,7 @@
+>> Mid Exam: 16-04-2025
+   - Spring Boot
+
+>> Evidence: (project): Journal Publication
+   - ER Diagram (Database)
+   - PowerPoint Presentation
+   - Frontend
