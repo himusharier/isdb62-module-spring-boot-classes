@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.himu.isdb.relational_db_operations_hibernate.dao.ClassTeacherDao;
+import com.himu.isdb.relational_db_operations_hibernate.dao.ClassTeacherProjection;
 import com.himu.isdb.relational_db_operations_hibernate.dto.ClassroomDto;
 import com.himu.isdb.relational_db_operations_hibernate.model.Classroom;
 import com.himu.isdb.relational_db_operations_hibernate.service.ClassroomService;
@@ -57,7 +58,7 @@ public class ClassroomController {
 	}
 
 	@GetMapping("/class-teachers")
-	public List<ClassTeacherDao> getAllClassTeacher() {
+	public List<ClassTeacherProjection> getAllClassTeachers() {
 		return classroomService.getAllClassTeacher();
 	}
 

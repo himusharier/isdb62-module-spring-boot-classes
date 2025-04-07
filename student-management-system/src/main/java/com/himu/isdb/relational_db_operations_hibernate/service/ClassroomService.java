@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.himu.isdb.relational_db_operations_hibernate.dao.ClassTeacherDao;
+import com.himu.isdb.relational_db_operations_hibernate.dao.ClassTeacherProjection;
 import com.himu.isdb.relational_db_operations_hibernate.dto.ClassroomDto;
 import com.himu.isdb.relational_db_operations_hibernate.model.Classroom;
 import com.himu.isdb.relational_db_operations_hibernate.model.Teacher;
@@ -74,9 +74,8 @@ public class ClassroomService {
 		}
 	}
 
-	public List<ClassTeacherDao> getAllClassTeacher() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ClassTeacherProjection> getAllClassTeacher() {
+		return classroomRepository.getAllClassTeacher();
 	}
 
 }
