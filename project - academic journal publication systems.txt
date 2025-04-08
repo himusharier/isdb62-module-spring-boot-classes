@@ -4,12 +4,13 @@ Project Name: "Academic Journal Publishing System"
 Publisher Website Features:
   - dummy publishing company details
   - proper journal informations
-  - showcase the journals with issues
+  - showcase journals with issues
   - user registration and login
 
 User Features: 
   - profile management
   - article or menuscript submission
+  - article processing charge (APC)*
   - track article processing status
   - menuscript search for status checking
   - menuscript version control
