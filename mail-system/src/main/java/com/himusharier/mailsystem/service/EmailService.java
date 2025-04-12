@@ -1,11 +1,18 @@
 package com.himusharier.mailsystem.service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Objects;
 import java.util.Properties;
 
 import com.himusharier.mailsystem.utils.GmailServiceUtil;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.Multipart;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMultipart;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +107,61 @@ public class EmailService {
 		service.users().messages().send("me", message).execute();
 	}
 
+	public void sendEmailWithAttachmentByParvesSir(String to, String subject, String bodyText, MultipartFile attachment)
+			throws MessagingException, IOException, GeneralSecurityException {
+		// Get Gmail service
+		Gmail service = gmailServiceUtil.getGmailService();
+
+		// Create email content
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+		MimeMessage email = new MimeMessage(session);
+
+		email.setFrom(new InternetAddress("me")); // "me" is a special value for authorized user
+		email.addRecipient(RecipientType.TO, new InternetAddress(to));
+		email.setSubject(subject);
+
+		// Create multipart message
+		Multipart multipart = new MimeMultipart();
+
+		// Text part
+		MimeBodyPart textPart = new MimeBodyPart();
+		textPart.setText(bodyText);
+		multipart.addBodyPart(textPart);
+
+		// Attachment part
+		MimeBodyPart attachmentPart = new MimeBodyPart();
+		// Convert MultipartFile to File
+		File convFile = convertMultiPartToFile(attachment);
+		DataSource source = new FileDataSource(convFile);
+		attachmentPart.setDataHandler(new DataHandler(source));
+		attachmentPart.setFileName(attachment.getOriginalFilename());
+		multipart.addBodyPart(attachmentPart);
+
+		// Set the content
+		email.setContent(multipart);
+
+		// Encode and send the email
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+		email.writeTo(buffer);
+		byte[] bytes = buffer.toByteArray();
+		String encodedEmail = Base64.encodeBase64URLSafeString(bytes);
+		Message message = new Message();
+		message.setRaw(encodedEmail);
+
+		// Send the message
+		service.users().messages().send("me", message).execute();
+
+		// Delete the temporary file
+		convFile.delete();
+	}
+
+	private File convertMultiPartToFile(MultipartFile file) throws IOException {
+		File convFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
+		FileOutputStream fos = new FileOutputStream(convFile);
+		fos.write(file.getBytes());
+		fos.close();
+		return convFile;
+	}
 
 }

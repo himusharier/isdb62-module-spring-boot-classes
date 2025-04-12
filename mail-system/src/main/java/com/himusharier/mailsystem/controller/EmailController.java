@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.mail.MessagingException;
@@ -36,6 +36,20 @@ public class EmailController {
 	public ResponseEntity<String> sendEmailWithAttachment(@ModelAttribute EmailRequest request, MultipartFile file) {
 		try {
 			emailService.sendEmailWithAttachment(request.getTo(), request.getSubject(), request.getBody(), file);
+			return ResponseEntity.ok("Email with attachment sent successfully");
+		} catch (MessagingException | IOException | GeneralSecurityException e) {
+			return ResponseEntity.internalServerError().body("Failed to send email: " + e.getMessage());
+		}
+	}
+
+	@PostMapping("/send-email-with-attachment")
+	public ResponseEntity<String> sendEmailWithAttachment(
+			@RequestParam("to") String to,
+			@RequestParam("subject") String subject,
+			@RequestParam("body") String body,
+			@RequestParam("attachment") MultipartFile attachment) {
+		try {
+			emailService.sendEmailWithAttachmentByParvesSir(to, subject, body, attachment);
 			return ResponseEntity.ok("Email with attachment sent successfully");
 		} catch (MessagingException | IOException | GeneralSecurityException e) {
 			return ResponseEntity.internalServerError().body("Failed to send email: " + e.getMessage());
