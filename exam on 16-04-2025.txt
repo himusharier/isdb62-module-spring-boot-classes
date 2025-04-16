@@ -1,7 +1,7 @@
 >> Mid Exam: 16-04-2025
    - Spring Boot
 
->> Evidence: (project): Journal Publication
+>> Evidence: 22-04-2025, (project): Journal Publication
    - ER Diagram (Database)
    - PowerPoint Presentation
-   - Frontend
+   - Frontend in Angular
