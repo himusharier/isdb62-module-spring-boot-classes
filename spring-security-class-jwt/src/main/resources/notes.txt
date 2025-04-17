@@ -1,0 +1,14 @@
+Engineering Digest
+https://www.youtube.com/@EngineeringDigest/playlists
+-----------------------------------------------------------------------------------------------------
+1. Java 8 Method and Constructor References: Simplifying Code and Boosting Efficiency - Explained!
+    https://www.youtube.com/watch?v=ar5jQQRWxFM
+
+2. Java 8 Streams Ultimate Tutorial: All You Need to Know in One Video
+    https://www.youtube.com/watch?v=DYyhFLC2eJ0
+
+3. Master Optional in Java 8: Complete Guide for Beginners
+    https://www.youtube.com/watch?v=-PBOA_u743I
+
+4. Master the New Java 8 Date & Time API: In-Depth Tutorial
+    https://www.youtube.com/watch?v=hPhpsC4kFdI
