@@ -1,6 +1,7 @@
 package com.himusharier.springSecurityClass.controller;
 
 import com.himusharier.springSecurityClass.config.JwtTokenProvider;
+import com.himusharier.springSecurityClass.model.CustomUserDetails;
 import com.himusharier.springSecurityClass.model.LoginRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,6 +34,11 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
         );
+
+        Object principal = authentication.getPrincipal();
+        if (principal instanceof CustomUserDetails) {
+            System.out.println("User is instance of CustomUserDetails");
+        }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtTokenProvider.createToken(authentication);

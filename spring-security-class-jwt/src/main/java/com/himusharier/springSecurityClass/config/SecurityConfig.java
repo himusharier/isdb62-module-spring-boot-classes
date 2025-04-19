@@ -1,5 +1,7 @@
 package com.himusharier.springSecurityClass.config;
 
+import com.himusharier.springSecurityClass.model.CustomUser;
+import com.himusharier.springSecurityClass.repository.MapCustomUserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableWebSecurity
@@ -45,7 +50,7 @@ public class SecurityConfig {
 
         return http.build();
     }
-
+/*
     @Bean
     public UserDetailsService userDetailsService() {
         // Regular user with basic access
@@ -87,7 +92,7 @@ public class SecurityConfig {
 
         return new InMemoryUserDetailsManager(regularUser, hemel, manager, admin);
     }
-
+*/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -96,6 +101,27 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
+    MapCustomUserRepository userRepository() {
+        String rawPassword = "admin";
+        String encoded = passwordEncoder().encode(rawPassword);
+
+        CustomUser customUser1 = new CustomUser(1L, "user@example.com", encoded);
+        CustomUser customUser2 = new CustomUser(1L, "user1@example.com", encoded);
+        CustomUser customUser3 = new CustomUser(1L, "user2@example.com", encoded);
+        CustomUser customUser4 = new CustomUser(1L, "user3@example.com", encoded);
+        CustomUser customUser5 = new CustomUser(1L, "user4@example.com", encoded);
+
+        Map<String, CustomUser> emailToCustomUser = new HashMap<>();
+        emailToCustomUser.put(customUser1.getEmail(), customUser1);
+        emailToCustomUser.put(customUser2.getEmail(), customUser2);
+        emailToCustomUser.put(customUser3.getEmail(), customUser3);
+        emailToCustomUser.put(customUser4.getEmail(), customUser4);
+        emailToCustomUser.put(customUser5.getEmail(), customUser5);
+
+        return new MapCustomUserRepository(emailToCustomUser);
     }
 
 }
