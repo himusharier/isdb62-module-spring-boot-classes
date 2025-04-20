@@ -1,7 +1,11 @@
 package com.himusharier.springSecurityClass.repository;
 
-import com.himusharier.springSecurityClass.model.CustomUser;
+import com.himusharier.springSecurityClass.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CustomUserRepository {
-     CustomUser findCustomUserByEmail(String email);
- }
+import java.util.Optional;
+
+public interface CustomUserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByEmail(String email);
+    boolean existsByEmail(String email);
+}
