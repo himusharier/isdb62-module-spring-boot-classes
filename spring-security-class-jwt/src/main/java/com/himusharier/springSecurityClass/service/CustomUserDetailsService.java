@@ -2,7 +2,6 @@ package com.himusharier.springSecurityClass.service;
 
  import com.himusharier.springSecurityClass.model.CustomUserDetails;
  import com.himusharier.springSecurityClass.model.User;
- import com.himusharier.springSecurityClass.repository.CustomUserRepository;
  import com.himusharier.springSecurityClass.repository.UserRepository;
  import jakarta.transaction.Transactional;
  import org.springframework.beans.factory.annotation.Autowired;

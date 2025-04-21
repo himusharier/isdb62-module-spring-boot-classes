@@ -4,8 +4,7 @@ import com.himusharier.springSecurityClass.config.JwtTokenProvider;
 import com.himusharier.springSecurityClass.constants.Role;
 import com.himusharier.springSecurityClass.dto.LoginRequest;
 import com.himusharier.springSecurityClass.dto.RegisterRequest;
-import com.himusharier.springSecurityClass.dto.RegisterRequestV2;
-import com.himusharier.springSecurityClass.dto.UserDTO;
+import com.himusharier.springSecurityClass.dto.UserResponse;
 import com.himusharier.springSecurityClass.model.CustomUserDetails;
 import com.himusharier.springSecurityClass.model.User;
 import com.himusharier.springSecurityClass.service.UserService;
@@ -44,19 +43,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(
-            @Valid @RequestBody RegisterRequestV2 registerRequest //RegisterRequest
+            @Valid @RequestBody RegisterRequest registerRequest
     ) {
         try {
             User user = new User(
-//                    registerRequest.getEmail(),
-//                    registerRequest.getPassword(),
-//                    Role.STUDENT, // Default role for registration
-//                    registerRequest.getFirstName(),
-//                    registerRequest.getLastName(),
-//                    registerRequest.getPhoneNumber()
                     registerRequest.email(),
                     registerRequest.password(),
-                    Role.STUDENT, // Default role for registration
+                    registerRequest.role(), // Default role for registration
                     registerRequest.firstName(),
                     registerRequest.lastName(),
                     registerRequest.phoneNumber()
@@ -65,15 +58,17 @@ public class AuthController {
             User savedUser = userService.createUser(user);
 
             // Create DTO to return (exclude sensitive info)
-            UserDTO userDTO = new UserDTO();
-            userDTO.setId(savedUser.getId());
-            userDTO.setEmail(savedUser.getEmail());
-            userDTO.setRole(savedUser.getRole());
-            userDTO.setFirstName(savedUser.getFirstName());
-            userDTO.setLastName(savedUser.getLastName());
-            userDTO.setPhoneNumber(savedUser.getPhoneNumber());
+            UserResponse userResponse = new UserResponse();
+            userResponse.setId(savedUser.getId());
+            userResponse.setEmail(savedUser.getEmail());
+            userResponse.setRole(savedUser.getRole());
+            userResponse.setFirstName(savedUser.getFirstName());
+            userResponse.setLastName(savedUser.getLastName());
+            userResponse.setPhoneNumber(savedUser.getPhoneNumber());
+            userResponse.setCreatedAt(savedUser.getCreatedAt());
+            userResponse.setUpdatedAt(savedUser.getUpdatedAt());
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
@@ -85,7 +80,7 @@ public class AuthController {
                                               @Valid @RequestBody LoginRequest loginRequest) {
         try {
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password())
+                    new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password())
             );
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -130,14 +125,14 @@ public class AuthController {
             CustomUserDetails customUserDetails = (CustomUserDetails) userDetails;
             User user = customUserDetails.user();
 
-            UserDTO userDTO = new UserDTO();
-            userDTO.setId(user.getId());
-            userDTO.setEmail(user.getEmail());
-            userDTO.setRole(user.getRole());
-            userDTO.setFirstName(user.getFirstName());
-            userDTO.setLastName(user.getLastName());
+            UserResponse userResponse = new UserResponse();
+            userResponse.setId(user.getId());
+            userResponse.setEmail(user.getEmail());
+            userResponse.setRole(user.getRole());
+            userResponse.setFirstName(user.getFirstName());
+            userResponse.setLastName(user.getLastName());
 
-            return ResponseEntity.ok(userDTO);
+            return ResponseEntity.ok(userResponse);
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or expired token");
