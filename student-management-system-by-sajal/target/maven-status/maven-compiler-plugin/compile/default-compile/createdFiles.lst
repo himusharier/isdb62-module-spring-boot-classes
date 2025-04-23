@@ -1,0 +1,16 @@
+com\example\student\exception\DuplicateResourceException.class
+com\example\student\exception\ErrorResponse$ValidationError.class
+com\example\student\StudentManagementSystemApplication.class
+com\example\student\repository\StudentRepository.class
+com\example\student\exception\ErrorResponse$ErrorResponseBuilder.class
+com\example\student\mapper\StudentMapper.class
+com\example\student\exception\GlobalExceptionHandler.class
+com\example\student\exception\ValidationException.class
+com\example\student\service\StudentService.class
+com\example\student\model\entity\Student.class
+com\example\student\exception\ResourceNotFoundException.class
+com\example\student\model\dto\StudentResponseDTO.class
+com\example\student\exception\ErrorResponse.class
+com\example\student\controller\StudentController.class
+com\example\student\service\impl\StudentServiceImpl.class
+com\example\student\model\dto\StudentRequestDTO.class
