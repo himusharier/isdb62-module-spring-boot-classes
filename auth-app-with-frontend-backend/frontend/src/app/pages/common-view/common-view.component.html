@@ -1,0 +1,16 @@
+<div class="common">
+    Welcome All Roles!
+    
+    <ng-container *ngIf="role === 'admin'">
+        <p>Admin Panel</p>
+        <p>Student Panel</p>
+        <p>Teacher Panel</p>
+    </ng-container>
+    
+    <ng-container *ngIf="role !== 'admin'">
+        <p *ngIf="role === 'student'">Student Panel</p>
+        <p *ngIf="role === 'teacher'">Teacher Panel</p>
+    </ng-container>
+    
+    <router-outlet></router-outlet>
+</div>
