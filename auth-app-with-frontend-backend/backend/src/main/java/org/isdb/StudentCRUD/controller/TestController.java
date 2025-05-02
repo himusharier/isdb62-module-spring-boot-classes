@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class TestController {
 
     // Public API endpoints - no authentication required
