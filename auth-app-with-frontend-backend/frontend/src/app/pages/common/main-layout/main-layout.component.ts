@@ -12,7 +12,6 @@ import { CommonModule } from '@angular/common';
     SidebarComponent,
     FooterComponent,
     RouterOutlet,
-    RouterLink,
     CommonModule
   ],
   templateUrl: './main-layout.component.html',

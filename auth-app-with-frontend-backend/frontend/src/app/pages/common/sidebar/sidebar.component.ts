@@ -5,8 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 @Component({
   selector: 'app-sidebar',
   imports: [
-    RouterLink,
-    RouterOutlet
+    RouterLink
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'

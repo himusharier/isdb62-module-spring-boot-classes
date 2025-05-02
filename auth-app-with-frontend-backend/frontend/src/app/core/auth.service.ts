@@ -17,6 +17,10 @@ export class AuthService {
     return this.http.post<any>('http://localhost:8081/api/auth/login', credentials);
   }
 
+  register(credentials: {firstName: string; lastName: string; phoneNumber: string; email: string; password: string; role: string}) {
+    return this.http.post<any>('http://localhost:8081/api/auth/register', credentials);
+  }
+
   setToken(token: string) {
     localStorage.setItem(this.tokenKey, token);
     const payload = JSON.parse(atob(token.split('.')[1]));

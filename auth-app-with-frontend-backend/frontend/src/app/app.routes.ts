@@ -7,8 +7,13 @@ import { CommonViewComponent } from './pages/common-view/common-view.component';
 import { TeacherViewComponent } from './pages/teacher-view/teacher-view.component';
 import { StudentViewComponent } from './pages/student-view/student-view.component';
 import { MainLayoutComponent } from './pages/common/main-layout/main-layout.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 export const routes: Routes = [
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
     {
         path: 'login',
         component: LoginComponent,
