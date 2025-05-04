@@ -1,0 +1,8 @@
+
+// google:
+client id = 633856199004-5cunji2v9f12231lmvjbdj74q9vl0ckr.apps.googleusercontent.com
+client secret = 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
+
+// github:
+client id = Ov23liN17yH1qdhgBkEX
+client secret = 882745455ef900ac315d288d934abb7e6a42d14e
