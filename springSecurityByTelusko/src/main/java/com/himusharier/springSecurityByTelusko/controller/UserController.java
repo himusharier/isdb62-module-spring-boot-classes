@@ -18,4 +18,12 @@ public class UserController {
         return service.register(user);
     }
 
+    @PostMapping("login")
+    public String login(@RequestBody Users user) {
+//        System.out.println(user);
+//        return "Success";
+
+        return service.verify(user);
+    }
+
 }
